@@ -12,11 +12,11 @@ import com.wynats.arq.configurationapi.model.ComponentConfiguration;
 @RestController
 public class ConfigurationRestController {
 
-	@RequestMapping("/configuration/{componentName}")
-    public ResponseEntity<ComponentConfiguration> getConfiguration(@PathVariable("componentName") String componentName) {
+	@RequestMapping("/component/{componentName}/configuration")
+    public ResponseEntity<ComponentConfiguration> getComponentConfiguration(@PathVariable("componentName") String componentName) {
         ComponentConfiguration componentConfiguration = new ComponentConfiguration();
         componentConfiguration.setColor("red");
-        componentConfiguration.setId("atuj");
+        componentConfiguration.setId(componentName);
         componentConfiguration.setWidth(300);
 		return new ResponseEntity<>(componentConfiguration,HttpStatus.OK);
     }

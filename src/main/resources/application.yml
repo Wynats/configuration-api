@@ -2,7 +2,7 @@
 spring:
   application:
      name: wynats-configuration-api
-     
+
 # Discovery Server Access
 eureka:
   instance:
@@ -17,3 +17,5 @@ eureka:
 # HTTP Server
 server:
   port: 2222   # HTTP (Tomcat) port
+  servlet:
+    contextPath: /wynats-configuration-api
