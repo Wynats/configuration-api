@@ -1,6 +1,20 @@
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-ARG JAR_FILE
-COPY ${JAR_FILE} app.jar
-#COPY /target/configuration-api-0.0.1-SNAPSHOT.jar app.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+FROM alpine/git as clone
+ARG url
+WORKDIR /app
+RUN git clone ${url}
+
+FROM maven:3.5-jdk-8-alpine as build
+ARG project
+WORKDIR /app
+COPY --from=clone /app/${project} /app
+RUN mvn install
+
+FROM openjdk:8-jre-alpine
+ARG artifactid
+ARG version
+ENV artifact ${artifactid}-${version}.jar
+WORKDIR /app
+COPY --from=build /app/target/${artifact} /app
+EXPOSE 8080
+ENTRYPOINT ["sh", "-c"]
+CMD ["java -jar ${artifact}"]
