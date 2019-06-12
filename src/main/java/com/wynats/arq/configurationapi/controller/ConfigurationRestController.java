@@ -3,10 +3,12 @@ package com.wynats.arq.configurationapi.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wynats.arq.configurationapi.model.Authentication;
 import com.wynats.arq.configurationapi.model.ComponentConfiguration;
 
 
@@ -20,5 +22,11 @@ public class ConfigurationRestController {
         componentConfiguration.setId(componentName);
         componentConfiguration.setWidth(300);
 		return new ResponseEntity<>(componentConfiguration,HttpStatus.OK);
+    }
+	
+	@RequestMapping(path="/login", method=RequestMethod.POST)
+    public ResponseEntity<String> login(@RequestBody Authentication authenticationData) {
+       
+		return new ResponseEntity<>("ok",HttpStatus.OK);
     }
 }

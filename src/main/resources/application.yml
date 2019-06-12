@@ -12,5 +12,5 @@ eureka:
 # HTTP Server
 server:
   port: 8081   # HTTP (Tomcat) port
-  servlet:
-    contextPath: /wynats-configuration-api
+  #servlet:
+  #  contextPath: /wynats-configuration-api
